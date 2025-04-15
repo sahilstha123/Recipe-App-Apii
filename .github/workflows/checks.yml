@@ -14,11 +14,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Test
-        run: DEV=true docker compose run --rm app sh -c "python manage.py test"
+        run:  docker compose run --rm app sh -c "python manage.py test"
 
       - name: Lint
-        run: DEV=true docker compose run --rm app sh -c "flake8"
+        run:  docker compose run --rm app sh -c "flake8"
 
        
