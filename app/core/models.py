@@ -9,7 +9,9 @@ from django.contrib.auth.models import (
 class UserManager(BaseUserManager):
     """Manager for users"""
     def create_user(self, email, password=None, **extra_fields):
-        user = self.model(email=email, **extra_fields)
+        if not email:
+            raise ValueError('user must have an email address')
+        user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -25,4 +27,4 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # This tells Django to use the email as the unique field for
     #  authentication instead of the default "username".
-    USERNAME_FIELD = "email"
+    USERNAME_FIELD = 'email'
