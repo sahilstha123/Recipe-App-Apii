@@ -40,10 +40,5 @@ class UserAdmin(BaseUserAdmin):
         }),
     )
 
-    class Media:
-        css = {
-            'all': ('css/custom_admin.css',)  # Path relative to static folder
-        }
-
 
 admin.site.register(models.User, UserAdmin)
