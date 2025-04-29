@@ -25,6 +25,25 @@ class UserAdmin(BaseUserAdmin):
     )
 
     readonly_fields = ['last_login']
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': (
+                'email',
+                'password1',
+                'password2',
+                'name',
+                'is_active',
+                'is_staff',
+                'is_superuser',
+            ),
+        }),
+    )
+
+    class Media:
+        css = {
+            'all': ('css/custom_admin.css',)  # Path relative to static folder
+        }
 
 
 admin.site.register(models.User, UserAdmin)
